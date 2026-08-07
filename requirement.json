@@ -1,0 +1,14 @@
+{
+    "title": "Backend Developer",
+    "required_skills": [
+        "Python",
+        "FastAPI",
+        "SQL"
+    ],
+    "preferred_skills": [
+        "Docker",
+        "Git",
+        "AWS"
+    ],
+    "minimum_experience": 1
+}

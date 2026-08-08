@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+env/
+venv/
+.env
+*.db
+resume_analyzer.db
+uploads/
+.git
+.gitignore

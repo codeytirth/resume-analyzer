@@ -1,14 +1,10 @@
 {
-    "title": "Backend Developer",
-    "required_skills": [
-        "Python",
-        "FastAPI",
-        "SQL"
-    ],
-    "preferred_skills": [
-        "Docker",
-        "Git",
-        "AWS"
-    ],
-    "minimum_experience": 1
+  "role": "Software developer ",
+  "required_skills": [
+    "Python\nC++\nC\nJava"
+  ],
+  "preferred_skills": [
+    "Docker\nLLM Integration"
+  ],
+  "min_experience_years": 1
 }

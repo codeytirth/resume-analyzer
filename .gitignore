@@ -11,5 +11,9 @@ __pycache__/
 # Uploaded resumes
 uploads/
 
+# SQLite Database
+*.db
+resume_analyzer.db
+
 # VS Code settings
 .vscode/

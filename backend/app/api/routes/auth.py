@@ -77,17 +77,17 @@ def login(req: LoginRequest, db: Session = Depends(get_db)):
         (User.username == req.username) | (User.email == req.username)
     ).first()
 
-    if not user or user.password_hash != hashed:
-        # If user doesn't exist yet, auto-register them for smooth demo testing
-        user = User(
-            username=req.username.strip(),
-            email=f"{req.username.strip()}@example.com",
-            password_hash=hashed,
-            role=req.role if req.role in ["candidate", "hr"] else "candidate"
+    if not user:
+        raise HTTPException(
+            status_code=400,
+            detail="Account not found. Please click 'Create Account' to register."
         )
-        db.add(user)
-        db.commit()
-        db.refresh(user)
+
+    if user.password_hash != hashed:
+        raise HTTPException(
+            status_code=400,
+            detail="Incorrect password. Please try again."
+        )
 
     return UserResponse(
         id=user.id,

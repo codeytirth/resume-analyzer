@@ -1,12 +1,15 @@
 import sys
 
+from pathlib import Path
 from app.config import settings
 from app.exceptions.errors import UnsupportedFileError
 
-# Reuse the existing CLI text extractor without modifying resume_reader.py
-sys.path.insert(0, str(settings.project_root))
+# # Ensure project root directory is in sys.path so resume_reader can be imported
+# project_root = str(Path(__file__).resolve().parent.parent.parent.parent)
+# if project_root not in sys.path:
+#     sys.path.insert(0, project_root)
 
-from resume_reader import read_resume  # noqa: E402
+from app.services.resume_reader import read_resume  # noqa: E402
 
 
 def extract_text_from_file(file_path: str) -> str:

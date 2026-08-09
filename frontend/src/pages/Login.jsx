@@ -35,16 +35,8 @@ export function Login() {
       const response = await axios.post(endpoint, payload);
       login(response.data);
     } catch (err) {
-      const msg = err.response?.data?.detail || "Authentication failed. Please check your backend connection.";
-      // Fallback for seamless offline demo testing
-      login({
-        id: Date.now(),
-        username: username.trim(),
-        name: username.trim().toUpperCase(),
-        email: email || `${username.trim()}@example.com`,
-        role: role,
-        token: "demo-token"
-      });
+      const msg = err.response?.data?.detail || "Authentication failed. Please check your credentials.";
+      setError(msg);
     } finally {
       setLoading(false);
     }

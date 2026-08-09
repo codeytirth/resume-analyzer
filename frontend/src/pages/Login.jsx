@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../api/client";
 import { useAuth } from "../context/AuthContext";
 
 export function Login() {
@@ -27,12 +27,12 @@ export function Login() {
     setError("");
 
     try {
-      const endpoint = isRegister ? "/api/auth/register" : "/api/auth/login";
+      const endpoint = isRegister ? "/auth/register" : "/auth/login";
       const payload = isRegister
         ? { username: username.trim(), email: email.trim(), password, role }
         : { username: username.trim(), password, role };
 
-      const response = await axios.post(endpoint, payload);
+      const response = await api.post(endpoint, payload);
       login(response.data);
     } catch (err) {
       const msg = err.response?.data?.detail || "Authentication failed. Please check your credentials.";

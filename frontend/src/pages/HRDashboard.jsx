@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../api/client";
 import { FileUpload } from "../components/FileUpload";
 import { AnalysisResults } from "../components/AnalysisResults";
 import { analyzeResume } from "../api/analyze";
@@ -23,7 +23,7 @@ export function HRDashboard() {
   const fetchRequirements = async () => {
     try {
       setLoadingReqs(true);
-      const res = await axios.get("/api/hr/requirements");
+      const res = await api.get("/hr/requirements");
       setRequirements(res.data);
       setRoleTitle(res.data.role || "");
       setReqSkills(res.data.required_skills ? res.data.required_skills.join(", ") : "");
@@ -46,7 +46,7 @@ export function HRDashboard() {
         preferred_skills: prefSkills.split(",").map((s) => s.trim()).filter(Boolean),
         min_experience_years: parseInt(minExp, 10) || 0,
       };
-      await axios.post("/api/hr/requirements", payload);
+      await api.post("/hr/requirements", payload);
       setSaveStatus("Requirements updated successfully!");
       fetchRequirements();
       setTimeout(() => setSaveStatus(""), 3000);

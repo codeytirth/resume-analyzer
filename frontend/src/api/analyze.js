@@ -1,8 +1,4 @@
-import axios from "axios";
-
-const api = axios.create({
-  baseURL: "/api",
-});
+import api from "./client";
 
 /**
  * Upload a resume file and return the analysis result from the backend.

@@ -1,17 +1,21 @@
 import os
-from pathlib import Path
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from app.config import settings
 
-# Path to the SQLite SQL database file in the backend directory
-DB_PATH = Path(__file__).resolve().parent.parent / "resume_analyzer.db"
-SQLALCHEMY_DATABASE_URL = f"sqlite:///{DB_PATH}"
+# Get target database URL (PostgreSQL in Production, SQLite in Local Dev)
+SQLALCHEMY_DATABASE_URL = settings.database_url
 
-# Connect to SQLite database
+# Configure connection parameters based on DB type
+connect_args = {}
+if SQLALCHEMY_DATABASE_URL.startswith("sqlite"):
+    connect_args["check_same_thread"] = False
+
+# Connect to database
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL,
-    connect_args={"check_same_thread": False}
+    connect_args=connect_args
 )
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

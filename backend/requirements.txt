@@ -6,4 +6,5 @@ groq
 pydantic
 pypdf
 pdfplumber
+psycopg2-binary
 sqlalchemy

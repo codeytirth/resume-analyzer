@@ -27,5 +27,19 @@ class Settings:
             )
         return api_key
 
+    @property
+    def database_url(self) -> str:
+        """Read DATABASE_URL from environment; fallback to local SQLite DB."""
+        db_url = os.getenv("DATABASE_URL", "").strip()
+        if db_url:
+            # Fix Vercel / Heroku postgres:// scheme for SQLAlchemy 1.4+
+            if db_url.startswith("postgres://"):
+                db_url = db_url.replace("postgres://", "postgresql://", 1)
+            return db_url
+        
+        # Local SQLite database fallback
+        local_db_path = self.project_root / "backend" / "resume_analyzer.db"
+        return f"sqlite:///{local_db_path}"
+
 
 settings = Settings()
